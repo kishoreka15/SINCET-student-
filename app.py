@@ -173,5 +173,9 @@ def twelfth():
 
     return render_template('twelfth.html')
 
+DATABASE_URL = os.environ.get("DATABASE_URL")
+
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
+
 if __name__ == '__main__':
     app.run(debug=True)
