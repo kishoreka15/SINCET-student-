@@ -1,9 +1,15 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask_sqlalchemy import SQLAlchemy
 import os
 import csv
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this in production
+
+# --- SQLAlchemy setup for Railway ---
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')  # Railway sets this automatically
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 # --- Streams data ---
 streams = {
@@ -172,10 +178,6 @@ def twelfth():
             return render_template('twelfth.html', error="Enter valid numbers.")
 
     return render_template('twelfth.html')
-
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
 
 if __name__ == '__main__':
     app.run(debug=True)
