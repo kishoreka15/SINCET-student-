@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Change for security
+app.secret_key = 'your_secret_key_here'  # Change this for security (e.g., random string)
 
 # Paths
 DATA_DIR = 'data'
@@ -17,11 +17,14 @@ if not os.path.exists(TASKS_FILE):
         f.write("Tasks Log Started\n")
 
 if not os.path.exists(USERS_FILE):
+    # Sample users: email:password (add your own; in real app, hash passwords)
     sample_users = "user@example.com:pass123\nadmin@site.com:adminpass\n"
     with open(USERS_FILE, 'w', encoding='utf-8') as f:
         f.write(sample_users)
+    print("Created sample users in data/users.txt. Add more as needed.")
 
 def validate_user(email, password):
+    """Simple check: Load users.txt and match email:password."""
     if not os.path.exists(USERS_FILE):
         return False
     with open(USERS_FILE, 'r', encoding='utf-8') as f:
@@ -33,7 +36,7 @@ def validate_user(email, password):
 
 @app.route('/')
 def home():
-    return render_template('first.html')
+    return render_template('first.html')  # Show selection page first
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,9 +45,9 @@ def login():
         password = request.form.get('password', '').strip()
         if validate_user(email, password):
             session['email'] = email
-            return jsonify({'status': 'success', 'redirect': url_for('tasks_page')})
+            return jsonify({'status': 'success', 'redirect': url_for('/tasks')})
         else:
-            return jsonify({'status': 'error', 'message': 'Invalid email or password'})
+            return jsonify({'status': 'error', 'message': 'Invalid email or password. Try again.'})
     return render_template('login.html')
 
 @app.route('/tasks')
@@ -70,8 +73,10 @@ def submit():
         with open(TASKS_FILE, 'a', encoding='utf-8') as f:
             f.write(entry)
         
+        print(f"Saved: {entry.strip()}")
         return jsonify({'status': 'success', 'message': 'Task saved!'})
     except Exception as e:
+        print(f"Error: {e}")
         return jsonify({'status': 'error', 'message': f'Failed: {str(e)}'}), 500
 
 @app.route('/view')
@@ -90,4 +95,5 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print("App starting. Login at http://127.0.0.1:5000/login")
+    app.run(debug=True, port=5000)

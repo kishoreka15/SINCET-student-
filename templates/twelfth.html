@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>12th Recommendation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <h1 class="text-3xl font-bold mb-6">12th Standard Department Recommendation</h1>
+
+  <form method="POST" class="bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
+    <label class="block mb-2">Physics Marks</label>
+    <input type="number" name="physics" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <label class="block mb-2">Chemistry Marks</label>
+    <input type="number" name="chemistry" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <label class="block mb-2">Maths Marks</label>
+    <input type="number" name="maths" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <label class="block mb-2">Biology Marks</label>
+    <input type="number" name="biology" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <label class="block mb-2">English Marks</label>
+    <input type="number" name="english" min="0" max="100" required class="border p-2 w-full mb-4">
+
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Check Eligibility</button>
+  </form>
+
+  {% if departments %}
+  <div class="mt-8 bg-white p-6 rounded-lg shadow max-w-lg mx-auto">
+    <h2 class="text-2xl font-bold mb-4">Eligible Departments</h2>
+    <ul class="list-disc pl-6">
+      {% for dept in departments %}
+        <li>{{ dept }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+</body>
+</html>
