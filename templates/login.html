@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - My Recreated Project</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Login to Access Tasks</h1>
+        <p>Enter your Email ID and Password to continue (like original project).</p>
+    </header>
+    <main>
+        <form id="loginForm" action="/login" method="POST">
+            <label for="email">Email ID:</label><br>
+            <input type="email" id="email" name="email" required placeholder="e.g., user@example.com"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br>
+            <button type="submit">Login</button>
+        </form>
+        <div id="feedback"></div>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

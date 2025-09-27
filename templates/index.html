@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recreated My Old Project - Task Logger</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>My Recreated Task App</h1>
+        <p>Enter your task description and select its priority.</p>
+    </header>
+    <main>
+        <form id="taskForm" action="/submit" method="POST">
+            <label for="task"><strong>Task Description:</strong></label><br>
+            <input type="text" id="task" name="task" required placeholder="Describe your task"><br><br>
+            
+            <label for="priority"><strong>Priority:</strong></label><br>
+            <select id="priority" name="priority" required>
+                <option value="" disabled selected>Select priority</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select><br><br>
+            
+            <button type="submit">Add Task</button>
+        </form>
+        <div id="feedback"></div>
+        <h2>Saved Tasks:</h2>
+        <ul id="taskList"></ul>
+    </main>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

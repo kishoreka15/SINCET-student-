@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Welcome to Task Logger</h1>
+    <p>Please choose your login type:</p>
+    <div style="margin-top: 30px;">
+        <a href="{{ url_for('login') }}?type=student">
+            <button style="padding: 10px 30px; font-size: 16px;">Student Login</button>
+        </a>
+        <a href="{{ url_for('login') }}?type=institution" style="margin-left: 20px;">
+            <button style="padding: 10px 30px; font-size: 16px;">Institution Login</button>
+        </a>
+    </div>
+</body>
+</html>

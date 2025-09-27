@@ -1,0 +1,2 @@
+user@example.com:pass123
+admin@site.com:adminpass
